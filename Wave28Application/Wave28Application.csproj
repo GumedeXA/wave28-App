@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BusinessAdminController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -214,6 +216,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Wave28 Api\ClientRegistration.Data\ClientRegistration.Data.csproj">
+      <Project>{56891A6D-566D-4BAD-B674-A3AFA1D15571}</Project>
+      <Name>ClientRegistration.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Wave28 Api\ClientRegistration.ViewModels\ClientRegistration.ViewModels.csproj">
       <Project>{282C0B00-2B7F-49AB-8308-30362CA9A033}</Project>
       <Name>ClientRegistration.ViewModels</Name>
