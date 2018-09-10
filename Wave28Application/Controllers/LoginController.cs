@@ -6,6 +6,8 @@ using Wave28Application.Models;
 
 using ClientRegistration.Data.AccountModels;
 using System.Web.Script.Serialization;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Wave28Application.Controllers
 {
@@ -27,6 +29,10 @@ namespace Wave28Application.Controllers
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Login(LoginModel lgModel)
@@ -42,22 +48,37 @@ namespace Wave28Application.Controllers
                     loginContent.Headers.Clear();
                     //Header details
                     loginContent.Headers.Add("Content-Type", "application/json");
-                    var sendData = client.PostAsync(client.BaseAddress, loginContent).Result;
-                    if (sendData.IsSuccessStatusCode)
+                    var responseData = client.PostAsync(client.BaseAddress, loginContent).Result;
+                    string data = "";
+                    using (HttpContent content = responseData.Content)
                     {
-                        return RedirectToAction("Index");
-                    }
-                    else
-                    {
-                        return View(sendData.IsSuccessStatusCode);
+                        var result = content.ReadAsStringAsync();
+                        data = result.Result;
+                        data = JsonConvert.DeserializeObject<string>(data);
+
+                        if (data.Equals("BusinessAdmin"))
+                        {
+                            return RedirectToAction("_BusinessAdminLayout", "Layout");
+                        }
+                        else if (data.Equals("Customer"))
+                        {
+                         
+                            return RedirectToAction("_CustomerLayout", "Layout");
+                        }
                     }
                 }
+               
+            }
+            catch (HttpRequestException e)
+            {
+                throw e.InnerException;
+               // ModelState.AddModelError("", "Service is Down");
             }
             catch (Exception e)
             {
                 throw e.InnerException;
-
             }
+            ModelState.AddModelError("", "Invalid username or password.");
             return View(lgModel);
 
         }

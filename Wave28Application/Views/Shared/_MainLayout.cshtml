@@ -1,0 +1,233 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>wave28</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link data-turbolinks-track="true" href="/assets/application-b9abcf044a0bc3e705568d103eddd00e.css" media="all" rel="stylesheet" />
+    <link href="~/Content/Notification/notifications.css" rel="stylesheet" />
+    <script data-turbolinks-track="true" src="/assets/application-851b8fea8f29120d8b765082481c5168.js"></script>
+    <meta content="authenticity_token" name="csrf-param" />
+    <meta content="tqvG69tCeRwlAtM/I2UIBFR6LP4DHT8d1qA0giV/B+g=" name="csrf-token" />
+</head>
+<body id="dashboard">
+
+    <div id="wrapper">
+
+        <div id="sidebar-default" class="main-sidebar fix-scroll">
+            <div class="current-user">
+                <a href="#" class="name">
+                    <span>
+                        Logged in @User.Identity.Name
+
+                    </span>
+                </a>
+            </div>
+            <div class="menu-section">
+                <h3>     </h3>
+                <ul>
+                    <li class="option">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("BusinessAdmin"))
+                        {
+                            <a href=@Url.Action("_BusinessAdminLayout", "Layout") class="active">
+                                <i class="ion-android-earth"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <a href=@Url.Action("_CustomerLayout", "Layout") class="active">
+                                <i class="ion-android-earth"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        }
+
+
+                    </li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("BusinessAdmin"))
+                    {
+                        <li class="option">
+                            <a href="#" class="dropdown-toggle" data-toggle="sidebar">
+                                <i class="ion-android-folder"></i> <span>Roducts</span>
+                                <i class="fa fa-chevron-down"></i>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="@Url.Action("Create", "Project")">Add New Project</a>
+                                </li>
+                                @if (User.IsInRole("Manager"))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "Project")">View Project</a>
+                                    </li>
+
+                                        <li>
+                                            <a href="@Url.Action("Index", "Discared")">Discarded Projects</a>
+                                        </li>
+
+
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                        {
+                            <li class="option">
+                                <a href="#" class="dropdown-toggle" data-toggle="sidebar">
+                                    <i class="ion-ios7-stopwatch"></i> <span>Profile</span>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="@Url.Action("Create", "Task")">Add new Task</a>
+                                    </li>
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Index", "Task")">View Task(s)</a>
+                                        </li>
+
+
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    @*@if (User.IsInRole("Manager"))
+                        {
+                            <li class="option">
+                                <a href="#" data-toggle="sidebar">
+                                    <i class="ion-android-friends"></i> <span>Team Details</span>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="@Url.Action("Create", "TeamMember")">Add A Team Member</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "TeamMember")">View Team Members</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="@Url.Action("Index", "InactiveTeamMember")">Deactivated Team Members</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+                        }*@
+                    @*@if (User.IsInRole("Manager"))
+                        {
+                            <li class="option">
+                                <a href="#" class="dropdown-toggle" data-toggle="sidebar">
+                                    <i class="ion-android-checkmark"></i> <span>Project Tasks</span>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="@Url.Action("Create", "ProjectTask")">Assign Task To Project</a>
+                                    </li>
+                                    @if (User.IsInRole("Manager"))
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Index", "ProjectTask")">View Project Task</a>
+                                        </li>
+
+
+                                    }
+                                </ul>
+                            </li>
+                        }*@
+                    @*@if (User.IsInRole("Manager"))
+                        {
+                            <li class="option">
+                                <a href="#" data-toggle="sidebar">
+                                    <i class="ion-stats-bars"></i> <span>Project Team</span>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="@Url.Action("Create", "TeamMemberProjectTaskAssign")">Assign New Member</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Index", "TeamMemberProjectTaskAssign")">View Assigned Members</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+                        }*@
+                    @*@if (User.IsInRole("Manager"))
+                        {
+                            <li class="option">
+                                <a href="#" data-toggle="sidebar">
+                                    <i class="ion-stats-bars"></i> <span>View Projects Progress</span>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <ul class="submenu">
+
+                                    <li>
+                                        <a href="@Url.Action("ViewMyProjectsProgress", "ProjectStatus")">View Chart Graph</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+                        }*@
+
+                    @*@if (User.IsInRole("TeamMember"))
+                            {
+                                <li class="option">
+                                    <a href="#" data-toggle="sidebar">
+                                        <i class="ion-stats-bars"></i> <span>View Project Task</span>
+                                        <i class="fa fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="submenu">
+                                        <li>
+                                            <a href="@Url.Action("Index", "ProjectStatus")">My Work</a>
+                                        </li>
+                                        @*<li>
+                                                <a href="@Url.Action("Index", "TeamMemberProjectTaskAssign")">View Assigned Members</a>
+                                            </li>
+
+                                    </ul>
+                                </li>
+
+
+                            }
+                        </ul>*@
+
+            </div>
+
+        </div>
+        <div id="content">
+            <div class="menubar">
+                <div class="period-select hidden-xs">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+            <div class="content">
+            </div>
+            <div class="content-wrapper">
+                @RenderBody()
+                @Scripts.Render("~/bundles/jquery", "~/bundles/bootstrap", "~/bundles/site")
+                @RenderSection("scripts", required: false)
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+<!-- Mirrored from wolfadmin.herokuapp.com/1.1 by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 22 Aug 2015 01:51:17 GMT -->
+</html>
+
+<script src="~/Scripts/js/flot-data.js"></script>
+<script src="~/Scripts/js/morris-data.js"></script>

@@ -75,10 +75,7 @@ c:\users\xolani\documents\visual studio 2017\Projects\Wave28Application\Wave28Ap
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\ClientRegistration.Data.dll
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Microsoft.AspNet.Identity.Core.dll
-C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Microsoft.Owin.dll
-C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Owin.dll
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\ClientRegistration.Data.pdb
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\ClientRegistration.Data.dll.config
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\Xolani\Documents\Visual Studio 2017\Projects\Wave28Application\Wave28Application\bin\Microsoft.Owin.xml

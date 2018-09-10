@@ -1,4 +1,5 @@
 ﻿using ClientRegistration.ViewModels.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -10,7 +11,7 @@ namespace Wave28Application.Controllers
 {
     public class BusinessAdminController : Controller
     {
-     
+
         HttpClient client;
 
         public BusinessAdminController()
@@ -20,7 +21,7 @@ namespace Wave28Application.Controllers
             client.DefaultRequestHeaders.Accept.Clear();
             //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("multipart/form-data"));
-        
+
         }
         // GET: BusinessAdmin
         public ActionResult Index()
@@ -35,34 +36,47 @@ namespace Wave28Application.Controllers
         }
 
         // GET: BusinessAdmin/Create
-        public ActionResult Create()
+        public ActionResult Register()
         {
             return View();
         }
 
         // POST: BusinessAdmin/Create
         [HttpPost]
-        public ActionResult Create(RegisterViewModel registerView)
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterViewModel registerView)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                        //HTTP POST
-                        var json = new JavaScriptSerializer().Serialize(registerView);
-                        var buffer = System.Text.Encoding.UTF8.GetBytes(json);
-                        var registerContent = new ByteArrayContent(buffer);
+                    //HTTP POST
+                    var json = new JavaScriptSerializer().Serialize(registerView);
+                    var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+                    var registerContent = new ByteArrayContent(buffer);
+                    registerContent.Headers.Clear();
+                    //Header details
+                    registerContent.Headers.Add("Content-Type", "application/json");
 
-                        var sendData = client.PostAsync(client.BaseAddress, registerContent).Result;
-                        if (sendData.IsSuccessStatusCode)
-                        {
-                            return RedirectToAction("Index");
-                        }
-                    else
+                    var responseData = client.PostAsync(client.BaseAddress, registerContent).Result;
+                    string data = "";
+                    using (HttpContent content = responseData.Content)
                     {
-                        return View(sendData.IsSuccessStatusCode);
+                        var result = content.ReadAsStringAsync();
+                        data = result.Result;
+                        data = JsonConvert.DeserializeObject<string>(data);
+                        if (data.Equals("Saved Successfully"))
+                        {
+                            return RedirectToAction("Login", "Login");
+                        }
+                        else if (data.Equals("User name already taken"))
+                        {
+                            ModelState.AddModelError("", data.ToString());
+                            return View(registerView);
+                        }
+
                     }
-                  
+
                 }
             }
             catch (Exception e)

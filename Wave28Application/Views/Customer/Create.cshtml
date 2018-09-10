@@ -1,24 +1,26 @@
 ﻿@model ClientRegistration.ViewModels.ViewModels.CustomerViewModel
 
 @{
-    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
 }
-
-<h2>Create</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    <center>
+        <img src="~/Content/Images/Registration-Banner1.png" style="width:20%" />
+    </center>
+    <br />
+    <legend></legend>
+    <center><h2>Customer Account Registration</h2></center>
 
     <div class="form-horizontal">
-        <h4>RegisterViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "someone@outlook.com" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IdNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.IdNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "8723456789876" } })
                 @Html.ValidationMessageFor(model => model.IdNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.fullNames, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.fullNames, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.fullNames, new { htmlAttributes = new { @class = "form-control", @placeholder = "Xolani Gumede" } })
                 @Html.ValidationMessageFor(model => model.fullNames, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.phoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.phoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "061 345 4567" } })
                 @Html.ValidationMessageFor(model => model.phoneNumber, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Shaun" } })
                 @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PostalAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PostalAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PostalAddress, new { htmlAttributes = new { @class = "form-control", @placeholder = "XD 23 Sandton Drive,Johnesburg,4059" } })
                 @Html.ValidationMessageFor(model => model.PostalAddress, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -84,16 +86,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Register" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

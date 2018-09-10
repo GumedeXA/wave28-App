@@ -1,5 +1,5 @@
 ﻿using ClientRegistration.ViewModels.ViewModels;
-
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -43,6 +43,7 @@ namespace Wave28Application.Controllers
 
         // POST: 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(CustomerViewModel customerView)
         {
             try
@@ -56,16 +57,34 @@ namespace Wave28Application.Controllers
                     registerContent.Headers.Clear();
                     //Header details
                     registerContent.Headers.Add("Content-Type", "application/json");
-                    var sendData = client.PostAsync(client.BaseAddress, registerContent).Result;
-                    if (sendData.IsSuccessStatusCode)
+                    var responseData = client.PostAsync(client.BaseAddress, registerContent).Result;
+                    string data = "";
+
+                    using (HttpContent content = responseData.Content)
                     {
-                        return RedirectToAction("Index");
+                        var result = content.ReadAsStringAsync();
+                        data = result.Result;
+                        data = JsonConvert.DeserializeObject<string>(data);
+                        if (data.Equals("Saved Successfully"))
+                        {
+                            return RedirectToAction("Login", "Login");
+                        }
+                        else if (data.Equals("User name already taken"))
+                        {
+                            ModelState.AddModelError("", data.ToString());
+                            return View(customerView);
+                        }
+                        else
+                        {
+                            return View("Something went Wrong.Please Contact Administrator");
+                        }
                     }
-                    else
-                    {
-                        return View(sendData.IsSuccessStatusCode);
-                    }
+
                 }
+            }
+            catch (ArgumentNullException e)
+            {
+                throw e.InnerException;
             }
             catch (Exception e)
             {
